@@ -23,6 +23,35 @@ public class Week1_Intro {
      * Output:
      * - The array such that for all `0 ≤ i < j < n`, `array[i] ≤ array[j]`.
      *
+     * Loop Invariant:
+     * - At the start of the `j`th iteration (j from 1..n-1),
+     *   the subarray `array[0..j-1]` is sorted and contains the elements
+     *   originally in `array[0..j-1]` but in sorted order.
+     *
+     * Proof of Correctness:
+     * 1. Initialization:
+     *    - Prior to the first iteration (when j = 1), `array[0..0]` has one element
+     *      and is trivially sorted. This matches the 1-based pseudocode's statement
+     *      "A[1..1] is sorted."
+     *
+     * 2. Maintenance:
+     *    - Assume for iteration `j-1`, the subarray `array[0..(j-1)-1]` is sorted.
+     *    - In iteration `j`, we:
+     *      a) Store `array[j]` in a temp variable `tmp`.
+     *      b) Shift elements that are greater than `tmp` one position to the right.
+     *      c) Insert `tmp` into the correct position.
+     *    - Thus, after this step, `array[0..j]` is sorted and still contains the
+     *      same elements it did originally.
+     *
+     * 3. Termination:
+     *    - When `j` reaches `n`, we have processed all elements.
+     *    - By the invariant, `array[0..n-1]` is sorted.
+     *
+     * Complexity:
+     * - Best Case: O(n) when the array is already sorted.
+     * - Worst Case: O(n²) when the array is sorted in reverse order (or nearly so).
+     * - Space Complexity: O(1) (in-place sorting).
+     *
      * @param array The integer array to be sorted.
      */
     public static void insertionSort(int[] array) {
